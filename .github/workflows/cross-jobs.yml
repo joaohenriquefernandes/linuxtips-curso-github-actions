@@ -1,0 +1,45 @@
+name: Work shared cross jobs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confere versao do Ubuntu
+        run: cat /etc/os-release
+
+      - name: Exibir mensagem
+        run: echo "Primeira mensagem" > ${{ github.workspace }}/mensagem.txt
+
+      - uses: actions/uploads-artifact@v4
+        with:
+          name: strigus
+          path: ${{ github.workspace }}/mensagem.txt
+
+  job_2:
+    runs-on: ubuntu-latest
+    needs: job_1
+    steps:
+      - name: Ver o conteudo do diretorio
+        run: ls -lha
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: strigus
+          path: mensagem.txt
+
+      - name: Ver o conteudo do diretorio
+        run: ls -lha && ls ./strigus/
+
+      - name: Move arquivo
+        run: mv strigus/mensagem.txt . && rm -rf ./strigus
+
+      - name: Ver o conteudo do diretorio
+        run: ls -lha
+
+      - name: Acessar arquivo mensagem
+        run: cat mensagem.txt
