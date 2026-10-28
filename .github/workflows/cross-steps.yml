@@ -1,0 +1,22 @@
+name: Work share cross steps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cross-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confere versao
+        run: cat /etc/os-release
+
+      - name: Exibir mensagem
+        run: echo "Primeira mensagem" > mensagem.txt
+
+      - name: Qualquer outra coisa
+        run: pwd
+
+      - name: Le o conteudo do arquivo
+        run: cat mesagem.txt
