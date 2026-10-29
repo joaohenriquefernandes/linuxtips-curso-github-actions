@@ -23,4 +23,6 @@ jobs:
         with:
           command: cves
           image: ${{ inputs.docker_image }}
+          dockerhub-user: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub-password: ${{ secrets.DOCKERHUB_TOKEN }}
           summary: true
