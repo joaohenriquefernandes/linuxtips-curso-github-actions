@@ -1,0 +1,19 @@
+name: Desafio 1
+
+on:
+  workflow_dispatch:
+    inputs:
+      docker_image:
+        description: Imagem Docker no formato imagem:tag
+        required: true
+        type: string
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar imagem Docker
+        run: docker pull ${{ inputs.docker_image }}
+
+      - name: Verificar imagem disponivel
+        run: docker images
