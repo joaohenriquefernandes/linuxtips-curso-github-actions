@@ -12,8 +12,15 @@ jobs:
   test-docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar imagem Docker
+      - name: Download da imagem
         run: docker pull ${{ inputs.docker_image }}
 
-      - name: Verificar imagem disponivel
+      - name: Listagem das imagem
         run: docker images
+
+      - name: Analise com Docker Scout CLI
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ inputs.docker_image }}
+          summary: true
