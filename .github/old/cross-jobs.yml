@@ -1,9 +1,6 @@
 name: Work shared cross jobs
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   job_1:

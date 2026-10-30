@@ -1,9 +1,6 @@
 name: Work share cross steps
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   cross-steps:
